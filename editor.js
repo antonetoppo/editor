@@ -9,7 +9,7 @@ function RandomWord(elem, stringRand, wordRand) {
         success: function (data) {
             tmp = data.Word; //4 length word recieved
             console.log(wordRand + " : " + tmp);
-            $(elem).text(stringRand.replace(wordRand, tmp));
+            $(elem).html(stringRand.replace(wordRand, tmp));
         }
     });
 }
@@ -112,7 +112,7 @@ $(document).ready(function () {
                 return false;
             }
 
-            var oldPara = $(selectedPara).text();
+            var oldPara = $(selectedPara).html();
             var elem = "<span class='bold'>" + selectedText + "</span>";
             $(selectedPara).html(oldPara.replace(selectedText, elem));
         }
@@ -137,7 +137,7 @@ $(document).ready(function () {
                 return false;
             }
 
-            var oldPara = $(selectedPara).text();
+            var oldPara = $(selectedPara).html();
             var elem = "<span class='underline'>" + selectedText + "</span>";
             $(selectedPara).html(oldPara.replace(selectedText, elem));
         }
@@ -161,7 +161,7 @@ $(document).ready(function () {
                 return false;
             }
 
-            var oldPara = $(selectedPara).text();
+            var oldPara = $(selectedPara).html();
             var elem = "<span class='red'>" + selectedText + "</span>";
             $(selectedPara).html(oldPara.replace(selectedText, elem));
         }
@@ -204,12 +204,12 @@ $(document).ready(function () {
     //Replace 4 letter word with random word
     $("#randomize").click(function () {
         $(".editablePara").each(function () {
-            var stringRand = $(this).text();
+            var stringRand = $(this).html();
             var lastIndex = 0;
             var randomWord;
             stringRand = stringRand.substr(lastIndex);
 
-            var sliceWordReg = /\b\w{4}([\s/.,]|$)/g; //getting 4 length word with '\s' or '.' or ',' or '$' after them
+            var sliceWordReg = /\b(\w{4})([\s.,<]|$)/g; //getting 4 length word with '\s' or '.' or ',' or '$' after them
 
             var wordRand = null;
             while (wordRand = sliceWordReg.exec(stringRand)) {
@@ -217,6 +217,9 @@ $(document).ready(function () {
                     wordRand = wordRand[0];
                 else
                     wordRand = wordRand[0].substr(0, wordRand[0].length - 1);
+                console.log(stringRand + " : " + wordRand);
+                if (wordRand.toLowerCase() === "span")
+                    continue;
 
                 RandomWord($(this), stringRand, wordRand);
             }
