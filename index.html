@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+
+    <title>Online Editor</title>
+</head>
+
+<body>
+    <div id="tooltip">
+        <span id="bold">B</span><span id="underline" class="underline">U</span><span id="red">R</span>
+    </div>
+
+    <section class="container clearfix" id="cover">
+        <header class="row">
+            <h1 class="text-center">Online Editor</h1>
+        </header>
+
+        <i class="fa fa-toggle-off pull-right" aria-hidden="true" id="scrollOff">Arrangement Off</i>
+        <i class="fa fa-toggle-on pull-right" aria-hidden="true" id="scrollOn">Arrangement On</i>
+
+        <section class="row editorWrapper">
+            <h2 contenteditable="true" class="placeholder editableTitle">Title</h2>
+            <div id="scrollable">
+                <div>
+                    <p contenteditable="true" class="placeholder editablePara">Enter Text.....</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="coverLink"></section>
+
+        <button id="done" class="btn btn-primary center-block">DONE</button>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+
+    <script src="editor.js"></script>
+
+    <script>
+    </script>
+
+</body>
+
+</html>
