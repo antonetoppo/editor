@@ -109,11 +109,11 @@ header {
     margin: 2px 0;
 }
 
-#arrngeOn {
+#arrngeOff {
     color: green;
     display: none;
 }
 
-#arrngeOff {
+#arrngeOn {
     color: red;
 }

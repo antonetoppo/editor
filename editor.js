@@ -7,7 +7,7 @@ function RandomWord(elem, stringRand, wordRand) {
         url: requestStr,
         dataType: "jsonp",
         success: function (data) {
-            tmp = data.Word;
+            tmp = data.Word; //4 length word recieved
             console.log(wordRand + " : " + tmp);
             $(elem).text(stringRand.replace(wordRand, tmp));
         }
@@ -21,21 +21,23 @@ $(document).ready(function () {
     var selectedText, flagEdit = true;
 
 
-    $("#arrngeOff").click(function () {
+    $("#arrngeOn").click(function () {
         $("#scrollable").sortable(); //Initialize the UI-Sortable
         $("#scrollable").sortable("enable"); //Enable:required to renable the sorting of pargraphs
 
         flagEdit = false;
+        $("#msg").text("Turn Off the arrangement, then edit!!");
 
-        $(this).css("display", "none");
-        $("#arrngeOn").css("display", "block");
-    });
-
-    $("#arrngeOn").click(function () {
         $(this).css("display", "none");
         $("#arrngeOff").css("display", "block");
+    });
+
+    $("#arrngeOff").click(function () {
+        $(this).css("display", "none");
+        $("#arrngeOn").css("display", "block");
 
         flagEdit = true;
+        $("#msg").text("");
 
         $("#scrollable").sortable("disable"); //Disable the sorting functionality
     });
@@ -59,10 +61,9 @@ $(document).ready(function () {
 
     //Remove the placeholder text when user clicks on title or paragraph.
     $(".editorWrapper").on("click focus", ".editablePara, .editableTitle", function (event) {
-        if (!flagEdit) {
-            alert("Turn Off the arrangement, then edit!!");
+        if (!flagEdit)
             return false;
-        }
+
         event.stopPropagation();
         $("#tooltip").css("display", "none");
         checkText();
@@ -70,7 +71,7 @@ $(document).ready(function () {
             $(this).html("").removeClass("placeholder");
     });
 
-    //Detect "Enter/Return" key wusing ACII code i.e. 13 and onPress crating a new paragraph
+    //Detect "Enter/Return" key using ACII code i.e. 13 and onPress crating a new paragraph
     $(".editorWrapper").on("keydown", ".editablePara", function (event) {
         $("#tooltip").css("display", "none");
         if (event.which == 13) {
@@ -78,6 +79,7 @@ $(document).ready(function () {
             var elem = $("<p></p>").text("Enter Text!!...").attr("contenteditable", "true").addClass("placeholder editablePara");
             elem = $("<div></div").html(elem);
             $(this).parent("div").after(elem);
+            $(elem).children("p").focus();
         }
     });
 
