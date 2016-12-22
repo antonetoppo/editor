@@ -7,6 +7,11 @@ body {
     min-height: 100vh;
 }
 
+.center {
+    margin: 0 auto;
+    width: 150px;
+}
+
 header {
     margin: 5px 0 20px;
 }

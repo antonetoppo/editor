@@ -1,3 +1,20 @@
+//Ajax Call to get randow word of len 4
+function RandomWord(elem, stringRand, wordRand) {
+    var requestStr = "http://randomword.setgetgo.com/get.php?len=4";
+    var tmp = null;
+    $.ajax({
+        type: "GET",
+        url: requestStr,
+        dataType: "jsonp",
+        success: function (data) {
+            tmp = data.Word;
+
+            $(elem).text(stringRand.replace(wordRand, tmp));
+        }
+    });
+}
+
+
 $(document).ready(function () {
 
     $("#scrollOff").click(function () {
@@ -165,10 +182,35 @@ $(document).ready(function () {
                 linkText = linkTextReg.exec(subStr);
                 //linkText = linkText[0].trim();
                 linkText = linkText[0].substr(1, linkText[0].length - 5);
-                console.log(url + " : " + linkText);
 
                 var anchor = $("<a></a>").attr("href", url).attr("target", "blank").html(linkText).addClass("coverLinks");
                 $("#coverLink").append(anchor);
+            }
+        });
+    });
+
+
+    //Replace 4 letter word with random word
+    $("#randomize").click(function () {
+        $(".editablePara").each(function () {
+            var stringRand = $(this).text();
+            var lastIndex = 0;
+            var randomWord;
+            stringRand = stringRand.substr(lastIndex);
+
+            var sliceWordReg = /\b\w{4}([\s/.,]|$)/g;
+
+            var wordRand;
+            while (wordRand = sliceWordReg.exec(stringRand)) {
+                if (wordRand[0].substr(-1).match(/\w/))
+                    wordRand = wordRand[0];
+                else
+                    wordRand = wordRand[0].substr(0, wordRand[0].length - 1);
+
+                RandomWord($(this), stringRand, wordRand);
+
+                //lastIndex = sliceWordReg.lastIndex++;
+                //stringRand = stringRand.substr(lastIndex);
             }
         });
     });
