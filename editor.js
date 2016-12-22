@@ -8,7 +8,7 @@ function RandomWord(elem, stringRand, wordRand) {
         dataType: "jsonp",
         success: function (data) {
             tmp = data.Word;
-
+            console.log(wordRand + " : " + tmp);
             $(elem).text(stringRand.replace(wordRand, tmp));
         }
     });
@@ -17,24 +17,28 @@ function RandomWord(elem, stringRand, wordRand) {
 
 $(document).ready(function () {
 
-    $("#scrollOff").click(function () {
+    var selectedPara = null;
+    var selectedText, flagEdit = true;
+
+
+    $("#arrngeOff").click(function () {
         $("#scrollable").sortable(); //Initialize the UI-Sortable
         $("#scrollable").sortable("enable"); //Enable:required to renable the sorting of pargraphs
 
+        flagEdit = false;
+
         $(this).css("display", "none");
-        $("#scrollOn").css("display", "block");
+        $("#arrngeOn").css("display", "block");
     });
 
-    $("#scrollOn").click(function () {
+    $("#arrngeOn").click(function () {
         $(this).css("display", "none");
-        $("#scrollOff").css("display", "block");
+        $("#arrngeOff").css("display", "block");
+
+        flagEdit = true;
 
         $("#scrollable").sortable("disable"); //Disable the sorting functionality
     });
-
-
-    var selectedPara = null;
-    var selectedText;
 
     //summary:To check whether the Title and para have any text if not show palceholders.
     var checkText = function () {
@@ -55,6 +59,10 @@ $(document).ready(function () {
 
     //Remove the placeholder text when user clicks on title or paragraph.
     $(".editorWrapper").on("click focus", ".editablePara, .editableTitle", function (event) {
+        if (!flagEdit) {
+            alert("Turn Off the arrangement, then edit!!");
+            return false;
+        }
         event.stopPropagation();
         $("#tooltip").css("display", "none");
         checkText();
@@ -208,9 +216,6 @@ $(document).ready(function () {
                     wordRand = wordRand[0].substr(0, wordRand[0].length - 1);
 
                 RandomWord($(this), stringRand, wordRand);
-
-                //lastIndex = sliceWordReg.lastIndex++;
-                //stringRand = stringRand.substr(lastIndex);
             }
         });
     });

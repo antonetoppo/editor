@@ -104,16 +104,16 @@ header {
     color: blue;
 }
 
-#scrollOn,
-#scrollOff {
+#arrngeOn,
+#arrngeOff {
     margin: 2px 0;
 }
 
-#scrollOn {
+#arrngeOn {
     color: green;
     display: none;
 }
 
-#scrollOff {
+#arrngeOff {
     color: red;
 }
