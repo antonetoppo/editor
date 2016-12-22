@@ -45,7 +45,7 @@ $(document).ready(function () {
         //As there can be multiple paragraphs, hence each used
         $(".editablePara").each(function () {
             if ($(this).html().length === 0)
-                $(this).addClass("placeholder").html("Enter Text.....");
+                $(this).addClass("placeholder").html("Enter Text!!...");
         });
         if ($(".editableTitle").html().length == 0)
             $(".editableTitle").addClass("placeholder").html("Title");
@@ -75,7 +75,7 @@ $(document).ready(function () {
         $("#tooltip").css("display", "none");
         if (event.which == 13) {
             event.preventDefault();
-            var elem = $("<p></p>").text("Enter Text.....").attr("contenteditable", "true").addClass("placeholder editablePara");
+            var elem = $("<p></p>").text("Enter Text!!...").attr("contenteditable", "true").addClass("placeholder editablePara");
             elem = $("<div></div").html(elem);
             $(this).parent("div").after(elem);
         }
@@ -178,7 +178,7 @@ $(document).ready(function () {
                 var url = "",
                     linkText = "";
 
-                var urlRegex = /(href=".+?"[\s>])/g;
+                var urlRegex = /(href=".+?"[\s>])/g; //getting "href="TEXT"" after it either '\s' or '>'
                 url = urlRegex.exec(subStr);
                 if (url)
                     url = url[0].substr(6, url[0].length - 8);
@@ -186,11 +186,12 @@ $(document).ready(function () {
                     url = "#";
                 }
 
-                var linkTextReg = />.+?<\/a>/g;
+                var linkTextReg = />.+?<\/a>/g; //getting ">Text</a>"
                 linkText = linkTextReg.exec(subStr);
                 //linkText = linkText[0].trim();
                 linkText = linkText[0].substr(1, linkText[0].length - 5);
 
+                //Create Link
                 var anchor = $("<a></a>").attr("href", url).attr("target", "blank").html(linkText).addClass("coverLinks");
                 $("#coverLink").append(anchor);
             }
@@ -206,11 +207,11 @@ $(document).ready(function () {
             var randomWord;
             stringRand = stringRand.substr(lastIndex);
 
-            var sliceWordReg = /\b\w{4}([\s/.,]|$)/g;
+            var sliceWordReg = /\b\w{4}([\s/.,]|$)/g; //getting 4 length word with '\s' or '.' or ',' or '$' after them
 
-            var wordRand;
+            var wordRand = null;
             while (wordRand = sliceWordReg.exec(stringRand)) {
-                if (wordRand[0].substr(-1).match(/\w/))
+                if (wordRand[0].substr(-1).match(/\w/)) //checking if the last char is letter or not
                     wordRand = wordRand[0];
                 else
                     wordRand = wordRand[0].substr(0, wordRand[0].length - 1);
