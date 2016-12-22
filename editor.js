@@ -88,10 +88,6 @@ $(document).ready(function () {
             var oldPara = $(selectedPara).text();
             var elem = "<span class='bold'>" + selectedText + "</span>";
             $(selectedPara).html(oldPara.replace(selectedText, elem));
-
-            /*$("span").filter(function () {
-                return $(this).text() == selectedText;
-            }).addClass("bold");*/
         }
 
         $("#tooltip").css("display", "none");
